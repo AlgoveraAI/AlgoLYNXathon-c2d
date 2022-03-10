@@ -33,7 +33,14 @@ def get_input(local=False):
 
 def run_bci(local=False):
     print('testing')
-    pass
+
+    filename = get_input(local)
+    if not filename:
+        print("Could not retrieve filename.")
+        return
+
+    
+
 
 if __name__ == "__main__":
     local = (len(sys.argv) == 2 and sys.argv[1] == "local")
