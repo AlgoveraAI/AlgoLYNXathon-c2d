@@ -32,6 +32,7 @@ def get_input(local=False):
         return filename
 
 def run_bci(local=False):
+    print('testing')
     pass
 
 if __name__ == "__main__":
