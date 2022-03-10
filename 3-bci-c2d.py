@@ -44,7 +44,7 @@ def run_bci(local=False):
     with zipfile.ZipFile(filename, 'r') as zip_ref:
         zip_ref.extractall('.')
 
-    print('ls3', os.listdir(f'/data/inputs/{did}'))
+    print('ls3', os.listdir(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1'))
 
     # print(f"data folder exists: {os.path.exists(str(data))}")
 
