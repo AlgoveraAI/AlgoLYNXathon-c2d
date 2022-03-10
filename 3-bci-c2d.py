@@ -2,6 +2,7 @@ import sys
 import os
 import json
 from pathlib import Path
+import zipfile
 
 def get_input(local=False):
     if local:
