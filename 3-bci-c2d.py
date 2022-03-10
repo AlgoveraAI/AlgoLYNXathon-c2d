@@ -42,7 +42,7 @@ def run_bci(local=False):
         return
 
     with zipfile.ZipFile(filename, 'r') as zip_ref:
-        zip_ref.extractall(str(data))
+        zip_ref.extractall('.')
 
     print('ls3', os.listdir(f'/data/inputs/{did}'))
 
