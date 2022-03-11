@@ -30,7 +30,7 @@ def get_input(local=False):
         filename = Path(f'/data/inputs/{did}/0')  # 0 for metadata service
         print(f"Reading asset file {filename}.")
         print('type', type(filename))
-        print('ls4', filename)
+        print('ls4', os.listdir(filename))
 
         return filename
 
