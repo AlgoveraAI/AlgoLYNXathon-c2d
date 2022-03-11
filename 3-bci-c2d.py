@@ -30,8 +30,13 @@ def get_input(
     did = dids[0]
     print(f"DID: {did}")
 
+    cwd = os.getcwd()
+    print('cwd', cwd)
+
     filename = Path(f'/data/inputs/{did}/0')  # 0 for metadata service
     print(f"Asset file {filename} exists: {os.path.exists(filename)}")
+
+    print('ls2', os.listdir(filename))
 
     print("Extracting data...")
 
