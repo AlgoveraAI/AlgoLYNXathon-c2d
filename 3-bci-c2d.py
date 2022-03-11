@@ -62,6 +62,8 @@ def get_input(
                 if fn.split('.')[-1] in ['jpeg', 'jpg', 'png']:
                     fns.append(fn)
                 print(len(path) * '---', file)
+    except:
+        pass
 
     print("Extracting data...")
 
