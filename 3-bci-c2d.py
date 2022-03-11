@@ -36,7 +36,32 @@ def get_input(
     filename = Path(f'/data/inputs/{did}/0')  # 0 for metadata service
     print(f"Asset file {filename} exists: {os.path.exists(filename)}")
 
-    print('ls2', os.listdir(filename))
+    print('ls2', os.listdir(f'/data/inputs/{did}'))
+
+    try:
+        with open(filename) as datafile:
+            print('check if its a html')
+            print(type(datafile))
+            data = datafile.read()
+            print(data)
+            print('_____________________________________________')
+    except:
+        print('except - check if its a html')
+        print('_____________________________________________')
+        pass
+
+    try:
+        print('lets see if its unzipped')
+        print(type(filename))
+        fns = []
+        for root, dirs, files in os.walk(str(filename)):
+            path = root.split(os.sep)
+            print((len(path) - 1) * '---', os.path.basename(root))
+            for file in files:
+                fn = os.path.join(root,file)
+                if fn.split('.')[-1] in ['jpeg', 'jpg', 'png']:
+                    fns.append(fn)
+                print(len(path) * '---', file)
 
     print("Extracting data...")
 
