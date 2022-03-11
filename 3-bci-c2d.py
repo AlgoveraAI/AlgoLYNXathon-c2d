@@ -1,19 +1,25 @@
-import sys
-import os
 import json
+import numpy as np
+import os
+import pandas as pd
 from pathlib import Path
+import sys
 import zipfile
 
-def get_input(local=False):
+def get_input(
+    local: bool=False, # Flag to indicate local vs C2D
+):
     if local:
-        print("Reading local directory.")
+        print("Reading local bci data directory...")
 
         # Root directory for dataset
-        filename = Path('data/punks/tealpunks')
+        data_dir = Path('data/bci')
 
-        return filename
+        return data_dir
 
-    dids = os.getenv('DIDS', None)
+    print("Reading from C2D container...")
+
+    dids = os.getenv('DIDS', None) # decentralized identifiers representing data assets
 
     if not dids:
         print("No DIDs found in environment. Aborting.")
@@ -21,50 +27,48 @@ def get_input(local=False):
 
     dids = json.loads(dids)
 
-    cwd = os.getcwd()
-    print('cwd', cwd)
+    did = dids[0]
+    print(f"DID: {did}")
 
-    for did in dids:
-        print('ls', f'/data/inputs/{did}/0')
-        print('ls2', os.listdir(f'/data/inputs/{did}'))
-        filename = Path(f'/data/inputs/{did}/0')  # 0 for metadata service
-        print(f"Reading asset file {filename}.")
-        # print('ls4', os.listdir(filename))
-
-        return filename
-
-def run_bci(local=False):
-    print("Getting input...")
-
-    filename = get_input(local)
-    if not filename:
-        print("Could not retrieve filename.")
-        return
+    filename = Path(f'/data/inputs/{did}/0')  # 0 for metadata service
+    print(f"Asset file {filename} exists: {os.path.exists(filename)}")
 
     print("Extracting data...")
 
-    data_path = Path('/data/extracted')
-    if not data_path.exists():
-        data_path.mkdir()
+    data_dir = Path('/data/extracted')
+    if not data_dir.exists():
+        data_dir.mkdir()
 
     with zipfile.ZipFile(filename, 'r') as zip_ref:
-        zip_ref.extractall(data_path)
+        zip_ref.extractall(data_dir)
 
-    print('ls3', os.listdir(data_path))
+    return data_dir
 
-    # print(f"Data folder exists: {os.path.exists(str(data))}")
+def run_bci(local=False):
 
-    fns = []
-    for root, dirs, files in os.walk(data_path):
+    print("Getting input...")
+    data_dir = get_input(local)
+
+    print("Listing files...")
+    data_path = []
+    for root, dirs, files in os.walk(data_dir):
         path = root.split(os.sep)
         print((len(path) - 1) * '---', os.path.basename(root))
         for file in files:
             fn = os.path.join(root,file)
             if fn.split('.')[-1] in ['feather']:
-                fns.append(fn)
+                data_path.append(fn)
             print(len(path) * '---', file)
 
+    print("Reading files...")
+    datas = []
+    for path in data_path:
+        datas.append(np.array(pd.read_feather(data_path[0])))
+    data = np.stack(datas)
 
+    print("Data shape:", data.shape)
+
+    return data
 
 if __name__ == "__main__":
     local = (len(sys.argv) == 2 and sys.argv[1] == "local")
