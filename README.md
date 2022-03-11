@@ -22,7 +22,7 @@ Algovera is a community of individuals working to facilitate and accelerate the 
 
 ## LYNX
 
-[Website](https://www.phas3.io/lynx) | Telegram | [Twitter](https://twitter.com/LYNX_Technology) 
+[Website](https://www.phas3.io/lynx) | [Telegram](https://t.me/+6e5hU5MFjKFhMDA0) | [Twitter](https://twitter.com/LYNX_Technology) 
 
 # 🏗 Initial Setup 
 
