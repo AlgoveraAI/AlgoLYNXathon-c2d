@@ -38,17 +38,17 @@ def get_input(
 
     print('ls2', os.listdir(f'/data/inputs/{did}'))
 
-    try:
-        with open(filename) as datafile:
-            print('check if its a html')
-            print(type(datafile))
-            data = datafile.read()
-            print(data)
-            print('_____________________________________________')
-    except:
-        print('except - check if its a html')
+    # try:
+    with open(filename) as datafile:
+        print('check if its a html')
+        print(type(datafile))
+        data = datafile.read()
+        print(data)
         print('_____________________________________________')
-        pass
+    # except:
+    #     print('except - check if its a html')
+    #     print('_____________________________________________')
+    #     pass
 
     try:
         print('lets see if its unzipped')
