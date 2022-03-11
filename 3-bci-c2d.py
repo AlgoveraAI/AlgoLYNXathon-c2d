@@ -46,16 +46,17 @@ def run_bci(local=False):
 
     print('ls3', os.listdir(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1'))
 
-    # print(f"data folder exists: {os.path.exists(str(data))}")
+    print(f"data folder exists: {os.path.exists(str(data))}")
 
-    # for root, dirs, files in os.walk(str(data)):
-    #     path = root.split(os.sep)
-    #     print((len(path) - 1) * '---', os.path.basename(root))
-    #     for file in files:
-    #         fn = os.path.join(root,file)
-    #         if fn.split('.')[-1] in ['jpeg', 'jpg', 'png']:
-    #             fns.append(fn)
-    #         print(len(path) * '---', file)
+    fns = []
+    for root, dirs, files in os.walk('/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1'):
+        path = root.split(os.sep)
+        print((len(path) - 1) * '---', os.path.basename(root))
+        for file in files:
+            fn = os.path.join(root,file)
+            if fn.split('.')[-1] in ['feather']:
+                fns.append(fn)
+            print(len(path) * '---', file)
 
 
 
