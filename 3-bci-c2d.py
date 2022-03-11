@@ -34,22 +34,28 @@ def get_input(local=False):
         return filename
 
 def run_bci(local=False):
-    print('testing')
+    print("Getting input...")
 
     filename = get_input(local)
     if not filename:
         print("Could not retrieve filename.")
         return
 
+    print("Extracting data...")
+
+    data_path = Path('/data/extracted')
+    if not data_path.exists():
+        data_path.mkdir()
+
     with zipfile.ZipFile(filename, 'r') as zip_ref:
-        zip_ref.extractall(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1')
+        zip_ref.extractall(data_path)
 
-    print('ls3', os.listdir(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1'))
+    print('ls3', os.listdir(data_path))
 
-    print(f"data folder exists: {os.path.exists(str(data))}")
+    # print(f"Data folder exists: {os.path.exists(str(data))}")
 
     fns = []
-    for root, dirs, files in os.walk('/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1'):
+    for root, dirs, files in os.walk(data_path):
         path = root.split(os.sep)
         print((len(path) - 1) * '---', os.path.basename(root))
         for file in files:
