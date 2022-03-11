@@ -44,6 +44,8 @@ source venv/bin/activate
 pip install wheel
 pip install ocean-lib
 
+pip install pandas
+pip install pyarrow
 pip install notebook
 ```
 
