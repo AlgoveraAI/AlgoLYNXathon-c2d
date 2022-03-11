@@ -29,8 +29,7 @@ def get_input(local=False):
         print('ls2', os.listdir(f'/data/inputs/{did}'))
         filename = Path(f'/data/inputs/{did}/0')  # 0 for metadata service
         print(f"Reading asset file {filename}.")
-        print('type', type(filename))
-        print('ls4', os.listdir(filename))
+        # print('ls4', os.listdir(filename))
 
         return filename
 
@@ -43,9 +42,9 @@ def run_bci(local=False):
         return
 
     with zipfile.ZipFile(filename, 'r') as zip_ref:
-        zip_ref.extractall('.')
+        zip_ref.extractall(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1')
 
-    print('ls3', os.listdir(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1/0'))
+    print('ls3', os.listdir(f'/data/inputs/1F7eEDD29299F6aa33d4711b8e6e122466f199e1'))
 
     # print(f"data folder exists: {os.path.exists(str(data))}")
 
